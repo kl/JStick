@@ -1,16 +1,21 @@
+//
+// ControllerHandler keeps a list of all the game controllers (gamepads and joysticks)
+// that jinput finds on the system.
+//
+
 package kl.JStick;
 
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ControllerHandler {
 
-    private List<Controller> controllers;
+    private Set<Controller> controllers;
 
-    public List<Controller> getControllers() {
+    public Set<Controller> getControllers() {
         return controllers;
     }
 
@@ -18,9 +23,9 @@ public class ControllerHandler {
         controllers = getControllerList();
     }
 
-    private List<Controller> getControllerList() {
+    private Set<Controller> getControllerList() {
         Controller[] all = ControllerEnvironment.getDefaultEnvironment().getControllers();
-        List<Controller> pads = new ArrayList<>();
+        Set<Controller> pads = new HashSet<>();
 
         for (Controller controller : all) {
             Controller.Type type = controller.getType();
