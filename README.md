@@ -1,4 +1,4 @@
-# JStick
+## JStick
 
 JStick is a Java application for simulating mouse movements and mouse presses using a gamepad or joystick.
 
