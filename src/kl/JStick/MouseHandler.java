@@ -1,6 +1,5 @@
 package kl.JStick;
 
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import net.java.games.input.Component;
 import net.java.games.input.Event;
 
@@ -24,7 +23,7 @@ public class MouseHandler {
     private final int Y_FACTOR              = 6;
     private final int SCROLL_FACTOR         = 1;
     private final int MOUSE_SLEEP           = 5;
-    private final int SCROLL_SLEEP          = 30;
+    private final int SCROLL_SLEEP          = 40;
 
     private Thread mouseUpdater;
     private Thread scrollUpdater;
