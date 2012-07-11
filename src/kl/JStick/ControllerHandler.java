@@ -13,17 +13,29 @@ import java.util.Set;
 
 public class ControllerHandler {
 
-    private Set<Controller> controllers;
+    private Set<Controller> controllers;    // the internal set of game controllers found.
 
     public Set<Controller> getControllers() {
         return controllers;
     }
 
     public ControllerHandler() {
-        controllers = getControllerList();
+        controllers = getControllerSet();
     }
 
-    private Set<Controller> getControllerList() {
+    //
+    // Rescans the system for added game controllers and adds them to the set.
+    //
+    public boolean rescanControllers() {
+        Set<Controller> newControllers = getControllerSet();
+        return controllers.addAll(newControllers);
+    }
+
+    //
+    // Gets all controllers on the system (including mice an keyboards) and then filters
+    // out all the game controllers which are returned in a set.
+    //
+    private Set<Controller> getControllerSet() {
         Controller[] all = ControllerEnvironment.getDefaultEnvironment().getControllers();
         Set<Controller> pads = new HashSet<>();
 
