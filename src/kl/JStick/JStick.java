@@ -13,7 +13,7 @@ public class JStick {
         ControllerHandler controllerHandler = new ControllerHandler();
         MouseHandler mouseHandler = new MouseHandler();
 
-        Set<Controller> controllers = controllerHandler.getControllers();
+        List<Controller> controllers = controllerHandler.getControllers();
 
         while (true) {
 
@@ -23,7 +23,9 @@ public class JStick {
                 mouseHandler.updateMouse(events);
 
                 Thread.sleep(10);
+
             }
+
         }
     }
 

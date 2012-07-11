@@ -6,38 +6,50 @@
 package kl.JStick;
 
 import net.java.games.input.Controller;
-import net.java.games.input.ControllerEnvironment;
+import net.java.games.input.DirectAndRawInputEnvironmentPlugin;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ControllerHandler {
 
-    private Set<Controller> controllers;    // the internal set of game controllers found.
+    private List<Controller> controllers;    // the internal List of game controllers found.
 
-    public Set<Controller> getControllers() {
+    public List<Controller> getControllers() {
         return controllers;
     }
 
     public ControllerHandler() {
-        controllers = getControllerSet();
+        controllers = getControllerList();
     }
 
     //
-    // Rescans the system for added game controllers and adds them to the set.
+    // Rescans the system for added game controllers and adds them to the List.
+    //
+    // TODO: not really working very well. The mouse pointer gets floaty whenever this method is called. Fix this.
     //
     public boolean rescanControllers() {
-        Set<Controller> newControllers = getControllerSet();
-        return controllers.addAll(newControllers);
+        List<Controller> newControllers = getControllerList();
+
+        if (newControllers.size() != controllers.size()) {
+            controllers = newControllers;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //
     // Gets all controllers on the system (including mice an keyboards) and then filters
-    // out all the game controllers which are returned in a set.
+    // out all the game controllers which are returned in a List.
     //
-    private Set<Controller> getControllerSet() {
-        Controller[] all = ControllerEnvironment.getDefaultEnvironment().getControllers();
-        Set<Controller> pads = new HashSet<>();
+    private List<Controller> getControllerList() {
+        // The following line is needed in order to get the current controllers connected to
+        // the system each time this method is called. See: http://www.java-gaming.org/index.php?topic=23964
+        DirectAndRawInputEnvironmentPlugin plugin = new DirectAndRawInputEnvironmentPlugin();
+
+        Controller[] all = plugin.getControllers();
+        List<Controller> pads = new ArrayList<>();
 
         for (Controller controller : all) {
             Controller.Type type = controller.getType();
