@@ -10,7 +10,7 @@ import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
+import java.util.List;
 
 public class MouseHandler {
     public enum MouseButton { LEFT, RIGHT, MIDDLE }
@@ -44,7 +44,7 @@ public class MouseHandler {
         scrollUpdater.start();
     }
 
-    public void updateMouse(ArrayList<Event> events) throws InterruptedException {
+    public void updateMouse(List<Event> events) throws InterruptedException {
         for (Event event : events) {
             handleEvent(event);
         }

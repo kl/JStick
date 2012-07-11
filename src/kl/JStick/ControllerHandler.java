@@ -4,12 +4,13 @@ import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ControllerHandler {
 
-    private ArrayList<Controller> controllers;
+    private List<Controller> controllers;
 
-    public ArrayList<Controller> getControllers() {
+    public List<Controller> getControllers() {
         return controllers;
     }
 
@@ -17,9 +18,9 @@ public class ControllerHandler {
         controllers = getControllerList();
     }
 
-    private ArrayList<Controller> getControllerList() {
+    private List<Controller> getControllerList() {
         Controller[] all = ControllerEnvironment.getDefaultEnvironment().getControllers();
-        ArrayList<Controller> pads = new ArrayList<>();
+        List<Controller> pads = new ArrayList<>();
 
         for (Controller controller : all) {
             Controller.Type type = controller.getType();

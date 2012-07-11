@@ -5,13 +5,14 @@ import net.java.games.input.Event;
 import net.java.games.input.EventQueue;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EventPoller {
 
-    public ArrayList<Event> getEvents(Controller controller) {
+    public List<Event> getEvents(Controller controller) {
         controller.poll();
 
-        ArrayList<Event> events = new ArrayList<>();
+        List<Event> events = new ArrayList<>();
         EventQueue eventQueue = controller.getEventQueue();
 
         while (true) {
