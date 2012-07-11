@@ -1,6 +1,6 @@
 __JStick__
 
-JStick is a Java application for simulation mouse movements and mouse presses using a gamepad or joystick.
+JStick is a Java application for simulating mouse movements and mouse presses using a gamepad or joystick.
 
 __Usage__
 
