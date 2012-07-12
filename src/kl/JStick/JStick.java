@@ -1,33 +1,45 @@
+//
+// This is the class that starts the JStick application.
+//
+
 package kl.JStick;
 
 import java.util.List;
-import java.util.Set;
 
 import net.java.games.input.Controller;
 import net.java.games.input.Event;
 
 public class JStick {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
-        ControllerHandler controllerHandler = new ControllerHandler();
-        MouseHandler mouseHandler = new MouseHandler();
+        final ControllerHandler   controllerHandler     = new ControllerHandler();
+        final MouseInput          mouseInput            = new MouseInput();
+        final KeyboardInput       keyboardInput         = new KeyboardInput();
 
-        List<Controller> controllers = controllerHandler.getControllers();
+        Thread mainLoop = new Thread(new Runnable() {
+            public void run() {
 
-        while (true) {
+                List<Controller> controllers = controllerHandler.getControllers();
 
-            for (Controller controller : controllers) {
+                while (true) {
+                    for (Controller controller : controllers) {
+                        List<Event> events = EventPoller.getEvents(controller);
 
-                List<Event> events = EventPoller.getEvents(controller);
-                mouseHandler.updateMouse(events);
+                        mouseInput.updateMouse(events);
+                        keyboardInput.updateKeyboard(events);
 
-                Thread.sleep(10);
-
+                        try {
+                            Thread.sleep(10);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             }
+        });
 
-        }
+        mainLoop.start();
     }
-
 }
 
